@@ -100,3 +100,9 @@ body {
   border-color: var(--gold);
   color: #fff;
 }
+
+/* ---------- 5. Validation + success messages ---------- */
+.group-error   { color: #b02a37; font-size: .8rem; margin-top: .3rem; }
+.form-message  { color: #b02a37; font-size: .85rem; text-align: center; margin-top: .5rem; }
+.success-box   { padding: 2rem 0; }
+.btn-link      { color: var(--green); }

@@ -37,16 +37,19 @@
               <div class="col-md-6">
                 <label for="name" class="form-label">Full name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
+                <div class="invalid-feedback">Please enter your name.</div>
               </div>
 
               <div class="col-md-6">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
+                <div class="invalid-feedback">Please enter a valid email.</div>
               </div>
 
               <div class="col-md-6">
                 <label for="whatsapp" class="form-label">WhatsApp number</label>
                 <input type="tel" class="form-control" id="whatsapp" name="whatsapp" required>
+                <div class="invalid-feedback">Please enter a valid number, e.g. 0300 1234567.</div>
               </div>
 
               <div class="col-md-6">
@@ -91,6 +94,7 @@
                   <input type="radio" class="btn-check" name="language" id="lang3" value="Both">
                   <label class="btn btn-outline-secondary btn-sm" for="lang3">Both</label>
                 </div>
+                <div class="group-error" id="languageError" hidden>Please choose one.</div>
               </div>
 
               <!-- Attendance: pick one or both (checkboxes). Both ticked = "either" -->
@@ -103,6 +107,7 @@
                   <input type="checkbox" class="btn-check" id="att2" name="attendance" value="Online">
                   <label class="btn btn-outline-secondary btn-sm" for="att2">Online</label>
                 </div>
+                <div class="group-error" id="attendanceError" hidden>Please choose at least one.</div>
               </div>
 
               <div class="col-12">
@@ -111,11 +116,18 @@
               </div>
 
               <div class="col-12 mt-3">
-                <button type="submit" class="btn btn-sukhan w-100">Join the circle</button>
+                <button type="submit" class="btn btn-sukhan w-100" id="submitBtn">Join the circle</button>
+                <div id="formMessage" class="form-message" role="alert" hidden></div>
               </div>
 
             </div>
           </form>
+
+          <div id="successBox" class="success-box text-center" hidden>
+            <h2 class="title">Welcome to the circle.</h2>
+            <p class="subtitle">Your place is saved. We’ll be in touch on WhatsApp.</p>
+            <button type="button" class="btn btn-link mt-3" id="againBtn">Register another reader</button>
+          </div>
 
         </div>
       </section>
@@ -124,5 +136,6 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

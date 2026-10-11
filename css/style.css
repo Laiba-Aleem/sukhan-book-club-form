@@ -1,0 +1,102 @@
+/* ---------- 1. Palette (from the Sukhan logo) ---------- */
+:root {
+  --cream: #F4EEDF;
+  --green: #1B4332;
+  --gold:  #A9843A;
+  --ink:   #2B2B26;
+
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+}
+
+/* ---------- 2. Page ---------- */
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+/* ---------- 3. Left visual ---------- */
+.visual-img {
+  display: block;
+  width: 100%;
+  height: 200px;            /* mobile: short banner on top */
+  object-fit: cover;
+}
+
+@media (min-width: 992px) {
+  .visual-panel { position: sticky; top: 0; height: 100vh; }
+  .visual-img   { height: 100%; }
+
+  /* form side fills the screen height, content centred inside it */
+  .form-side { min-height: 100vh; display: flex; align-items: center; }
+}
+
+/* ---------- 4. Form side ---------- */
+.form-wrap {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 2rem;
+}
+@media (min-width: 992px) {
+  .form-wrap { padding: 1rem 2rem; }
+}
+
+/* header: logo + title + subtitle, all centred */
+.logo { width: auto; height: clamp(56px, 11vh, 92px); }
+
+.title {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--green);
+  font-size: clamp(1.6rem, 4.2vh, 2.1rem);
+  line-height: 1.1;
+  margin: 0;
+}
+.subtitle {
+  margin: .25rem 0 0;
+  font-size: .9rem;
+  color: #6b6757;
+}
+
+/* labels and inputs (vertical sizes shrink on short screens) */
+.form-label { font-size: .85rem; font-weight: 500; margin-bottom: .2rem; }
+.optional   { color: #8a8573; font-weight: 400; }
+
+.form-control {
+  background-color: #FBF8F0;
+  border-color: #D9CDB0;
+  padding-block: clamp(.25rem, 1vh, .5rem);
+}
+.form-control:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 .2rem rgba(27, 67, 50, .15);
+}
+
+/* chips (genres, language, attendance) */
+.btn-outline-secondary {
+  --bs-btn-color: var(--green);
+  --bs-btn-border-color: #C9BC9A;
+  --bs-btn-hover-bg: #E9E0C9;
+  --bs-btn-hover-border-color: var(--green);
+  --bs-btn-hover-color: var(--green);
+  --bs-btn-active-bg: var(--green);
+  --bs-btn-active-border-color: var(--green);
+  --bs-btn-active-color: #fff;
+}
+
+/* submit button */
+.btn-sukhan {
+  background-color: var(--green);
+  border: 1px solid var(--green);
+  color: #fff;
+  letter-spacing: .04em;
+  padding-block: clamp(.4rem, 1.2vh, .6rem);
+}
+.btn-sukhan:hover,
+.btn-sukhan:focus {
+  background-color: #14352A;
+  border-color: var(--gold);
+  color: #fff;
+}

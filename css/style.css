@@ -106,3 +106,102 @@ body {
 .form-message  { color: #b02a37; font-size: .85rem; text-align: center; margin-top: .5rem; }
 .success-box   { padding: 2rem 0; }
 .btn-link      { color: var(--green); }
+
+/* ---------- 6. Opening screen ---------- */
+:root {
+  --gold-dark: #8A6A25;                 /* gold for text (more readable than --gold) */
+  --intro-bg: #F2EBD9;                  /* = paper colour of the landscape artwork */
+}
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;                        /* above everything */
+  background: var(--intro-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* artwork: laptop (landscape) = gold-lined page, edges fade into the paper colour */
+.intro-art {
+  position: absolute;
+  inset: 0;
+  background: url('../images/intro-landscape.webp') center / auto 100% no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+}
+
+.intro-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(.6rem, 2.4vh, 1.4rem);
+  padding: 1rem;
+  text-align: center;
+}
+.intro-logo { width: clamp(200px, 46vh, 340px); height: auto; }
+
+.intro-tagline {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.3rem, 3.6vh, 1.8rem);
+  letter-spacing: .04em;
+  color: var(--gold-dark);
+}
+.intro-btn {
+  border-radius: 50rem;
+  padding: .6rem 2.2rem;
+}
+
+/* gentle entrance: logo, tagline, button appear one after the other */
+.intro-content > * { opacity: 0; animation: rise .9s ease forwards; }
+.intro-content > :nth-child(2) { animation-delay: .35s; }
+.intro-content > :nth-child(3) { animation-delay: .7s; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* phones / portrait screens: use the botanical-bottom artwork instead */
+@media (orientation: portrait) {
+  :root { --intro-bg: #F1EBDF; }
+  .intro-art {
+    background: url('../images/intro-portrait.webp') 50% 100% / cover no-repeat;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .intro-logo { width: min(72vw, 300px); }
+}
+
+/* ---------- 7. Ink transition ---------- */
+.ink-layer { position: absolute; inset: 0; pointer-events: none; }
+
+.ink {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0);
+  will-change: transform;
+  animation: inkGrow .6s cubic-bezier(.2, .75, .25, 1) forwards;
+}
+@keyframes inkGrow { to { transform: translate(-50%, -50%) scale(1); } }
+
+/* when ink has covered the screen: hide the opening, let the ink fade away */
+.intro.is-open { background: transparent; pointer-events: none; }
+.intro.is-open .intro-art,
+.intro.is-open .intro-content { visibility: hidden; }
+.intro.is-open .ink-layer { opacity: 0; transition: opacity .75s ease; }
+
+/* the form screen rises in after the opening */
+main { transition: opacity .8s ease .1s, transform .8s ease .1s; }
+body.intro-active { overflow: hidden; }
+body.intro-active main { opacity: 0; transform: translateY(18px); }
+
+@media (prefers-reduced-motion: reduce) {
+  main { transition: none; }
+  .intro-content > * { animation: none; opacity: 1; }
+}
